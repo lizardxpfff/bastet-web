@@ -21,3 +21,6 @@ Este proyecto está diseñado para ser fácil de usar, con una interfaz gráfica
 - **requests**: Biblioteca para hacer peticiones HTTP y obtener la dirección desde la API de Google Maps.
 - **API de Google Maps**: Para obtener direcciones basadas en las coordenadas geográficas.
 
+![image](https://github.com/user-attachments/assets/775a0e9d-043e-402e-a026-284438f401c8) 
+![image](https://github.com/user-attachments/assets/7669fa90-3870-4d5b-8c82-98f859aef4a3)
+
