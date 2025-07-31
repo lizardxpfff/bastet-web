@@ -1,9 +1,11 @@
 import tkinter as tk
+from tkinter import ttk
 import tkinter.messagebox as messagebox
 import requests
 import sqlite3
 import folium
 import webbrowser
+from tkinterweb import HtmlFrame
 import os
 
 # --- Inicializar base de datos ---
@@ -27,7 +29,7 @@ inicializar_db()
 # --- Función para obtener la dirección desde la API de Google Maps ---
 def obtener_direccion(latitud, longitud):
     try:
-        url = f"https://maps.googleapis.com/maps/api/geocode/json?latlng={latitud},{longitud}&key=null"
+        url = f"https://maps.googleapis.com/maps/api/geocode/json?latlng={latitud},{longitud}&key=AIzaSyCrcD5dnO3F61BT6HLbPgGJ-hrQASOiXKg"
         response = requests.get(url)
         data = response.json()
         if data['status'] == 'OK' and data['results']:
@@ -42,9 +44,11 @@ def mostrar_mapa(latitud, longitud, camaras):
     mapa = folium.Map(location=[latitud, longitud], zoom_start=16)
     folium.Marker([latitud, longitud], tooltip="Ubicación buscada", icon=folium.Icon(color='blue')).add_to(mapa)
     for camara in camaras:
+        popup = folium.Popup(f"<b>Propietario:</b> {camara[3]}<br><b>Coordenadas:</b> {camara[1]}, {camara[2]}<br><b>Contacto:</b> {camara[4]}", max_width=300)
         folium.Marker(
             [camara[1], camara[2]],
-            tooltip=f"Propietario: {camara[3]}\nContacto: {camara[4]}",
+            tooltip=f"Propietario: {camara[3]}",
+            popup=popup,
             icon=folium.Icon(color='red', icon='camera')
         ).add_to(mapa)
     mapa_path = os.path.abspath("camaras_mapa.html")
@@ -105,15 +109,16 @@ def buscar_camaras():
     cursor.execute("SELECT * FROM camaras WHERE latitud BETWEEN ? AND ? AND longitud BETWEEN ? AND ?",
                    (latitud-radio, latitud+radio, longitud-radio, longitud+radio))
     camaras_cercanas = cursor.fetchall()
-    mensaje = f"Dirección: {direccion}\n\nCámaras cercanas:\n"
-    for camara in camaras_cercanas:
-        mensaje += f"\nPropietario: {camara[3]}\nCoordenadas: {camara[1]}, {camara[2]}\nContacto: {camara[4]}\n\n"
-    messagebox.showinfo("Resultado de la búsqueda", mensaje)
     conn.close()
     if camaras_cercanas:
         mostrar_mapa(latitud, longitud, camaras_cercanas)
     else:
-        messagebox.showinfo("Mapa", "No se encontraron cámaras cercanas para mostrar en el mapa.")
+        # Mostrar el mapa vacío igual en el navegador
+        mapa = folium.Map(location=[latitud, longitud], zoom_start=16)
+        folium.Marker([latitud, longitud], tooltip="Ubicación buscada", icon=folium.Icon(color='blue')).add_to(mapa)
+        mapa_path = os.path.abspath("camaras_mapa.html")
+        mapa.save(mapa_path)
+        webbrowser.open(f"file://{mapa_path}")
 
 # --- Función para limpiar los campos de entrada ---
 def limpiar_campos():
@@ -155,50 +160,85 @@ def abrir_submenu_agregar_camara():
     )
     boton_guardar_camara.grid(row=4, column=0, columnspan=2, padx=10, pady=10)
 
-# Crear la ventana principal
+
+# --- Crear la ventana principal ---
 root = tk.Tk()
 root.title("Consulta de Cámaras")
-root.geometry("500x400")
-root.configure(bg="#1E3A5F")
-btn_color = "#4A90E2"
-btn_hover_color = "#1C3D6D"
+root.geometry("520x420")
+root.configure(bg="#eaf0fa")
 
-def on_enter(e):
-    e.widget['background'] = btn_hover_color
+# --- Estilos modernos con ttk ---
+style = ttk.Style()
+style.theme_use('clam')
+style.configure('TFrame', background="#eaf0fa")
+style.configure('TLabel', background="#eaf0fa", foreground="#1E3A5F", font=("Segoe UI", 12))
+style.configure('TButton', font=("Segoe UI", 11, "bold"), padding=6, background="#4A90E2", foreground="white")
+style.map('TButton', background=[('active', '#1C3D6D')])
 
-def on_leave(e):
-    e.widget['background'] = btn_color
+# --- Frame principal ---
+main_frame = ttk.Frame(root, padding=20)
+main_frame.pack(expand=True, fill="both")
 
-boton_buscar = tk.Button(root, text="Buscar Cámaras", command=buscar_camaras, bg=btn_color, fg="white", font=("Arial", 12))
-boton_buscar.grid(row=0, column=1, padx=10, pady=10)
-boton_buscar.bind("<Enter>", on_enter)
-boton_buscar.bind("<Leave>", on_leave)
+# --- Título ---
+title_label = ttk.Label(main_frame, text="Consulta de Cámaras", font=("Segoe UI", 18, "bold"), anchor="center")
+title_label.grid(row=0, column=0, columnspan=2, pady=(0, 20))
 
-boton_limpiar = tk.Button(root, text="Limpiar", command=limpiar_campos, bg=btn_color, fg="white", font=("Arial", 12))
-boton_limpiar.grid(row=1, column=0, padx=10, pady=10)
-boton_limpiar.bind("<Enter>", on_enter)
-boton_limpiar.bind("<Leave>", on_leave)
+# --- Entradas de latitud y longitud ---
+label_latitud = ttk.Label(main_frame, text="Latitud:")
+label_latitud.grid(row=1, column=0, padx=10, pady=10, sticky="e")
+entry_latitud = ttk.Entry(main_frame, font=("Segoe UI", 12), width=22)
+entry_latitud.grid(row=1, column=1, padx=10, pady=10, sticky="w")
 
-boton_salir = tk.Button(root, text="Salir", command=root.quit, bg=btn_color, fg="white", font=("Arial", 12))
-boton_salir.grid(row=1, column=1, padx=10, pady=10)
-boton_salir.bind("<Enter>", on_enter)
-boton_salir.bind("<Leave>", on_leave)
+label_longitud = ttk.Label(main_frame, text="Longitud:")
+label_longitud.grid(row=2, column=0, padx=10, pady=10, sticky="e")
+entry_longitud = ttk.Entry(main_frame, font=("Segoe UI", 12), width=22)
+entry_longitud.grid(row=2, column=1, padx=10, pady=10, sticky="w")
 
-boton_agregar_camara = tk.Button(root, text="Agregar Cámara", command=abrir_submenu_agregar_camara, bg=btn_color, fg="white", font=("Arial", 12))
-boton_agregar_camara.grid(row=0, column=0, padx=10, pady=10)
-boton_agregar_camara.bind("<Enter>", on_enter)
-boton_agregar_camara.bind("<Leave>", on_leave)
+# --- Botones principales ---
+boton_buscar = ttk.Button(main_frame, text="Buscar Cámaras", command=buscar_camaras)
+boton_buscar.grid(row=3, column=0, padx=10, pady=15, sticky="ew")
 
-label_latitud = tk.Label(root, text="Latitud:", bg="#1E3A5F", fg="white", font=("Arial", 12))
-label_latitud.grid(row=2, column=0, padx=10, pady=10, sticky="w")
+boton_limpiar = ttk.Button(main_frame, text="Limpiar", command=limpiar_campos)
+boton_limpiar.grid(row=3, column=1, padx=10, pady=15, sticky="ew")
 
-entry_latitud = tk.Entry(root, font=("Arial", 12))
-entry_latitud.grid(row=2, column=1, padx=10, pady=10)
+boton_agregar_camara = ttk.Button(main_frame, text="Agregar Cámara", command=abrir_submenu_agregar_camara)
+boton_agregar_camara.grid(row=4, column=0, padx=10, pady=10, sticky="ew")
 
-label_longitud = tk.Label(root, text="Longitud:", bg="#1E3A5F", fg="white", font=("Arial", 12))
-label_longitud.grid(row=3, column=0, padx=10, pady=10, sticky="w")
+boton_salir = ttk.Button(main_frame, text="Salir", command=root.quit)
+boton_salir.grid(row=4, column=1, padx=10, pady=10, sticky="ew")
 
-entry_longitud = tk.Entry(root, font=("Arial", 12))
-entry_longitud.grid(row=3, column=1, padx=10, pady=10)
+# --- Mejorar el submenú de agregar cámara ---
+def abrir_submenu_agregar_camara():
+    ventana_agregar_camara = tk.Toplevel(root)
+    ventana_agregar_camara.title("Agregar Cámara")
+    ventana_agregar_camara.configure(bg="#eaf0fa")
+    frame = ttk.Frame(ventana_agregar_camara, padding=20)
+    frame.pack(expand=True, fill="both")
+
+    label_latitud_camara = ttk.Label(frame, text="Latitud:")
+    label_latitud_camara.grid(row=0, column=0, padx=10, pady=10, sticky="e")
+    entry_latitud_camara = ttk.Entry(frame, font=("Segoe UI", 12), width=22)
+    entry_latitud_camara.grid(row=0, column=1, padx=10, pady=10, sticky="w")
+
+    label_longitud_camara = ttk.Label(frame, text="Longitud:")
+    label_longitud_camara.grid(row=1, column=0, padx=10, pady=10, sticky="e")
+    entry_longitud_camara = ttk.Entry(frame, font=("Segoe UI", 12), width=22)
+    entry_longitud_camara.grid(row=1, column=1, padx=10, pady=10, sticky="w")
+
+    label_propietario_camara = ttk.Label(frame, text="Propietario:")
+    label_propietario_camara.grid(row=2, column=0, padx=10, pady=10, sticky="e")
+    entry_propietario_camara = ttk.Entry(frame, font=("Segoe UI", 12), width=22)
+    entry_propietario_camara.grid(row=2, column=1, padx=10, pady=10, sticky="w")
+
+    label_contacto_camara = ttk.Label(frame, text="Contacto:")
+    label_contacto_camara.grid(row=3, column=0, padx=10, pady=10, sticky="e")
+    entry_contacto_camara = ttk.Entry(frame, font=("Segoe UI", 12), width=22)
+    entry_contacto_camara.grid(row=3, column=1, padx=10, pady=10, sticky="w")
+
+    boton_guardar_camara = ttk.Button(
+        frame, text="Guardar Datos",
+        command=lambda: almacenar_camara(entry_latitud_camara, entry_longitud_camara, entry_propietario_camara, entry_contacto_camara)
+    )
+    boton_guardar_camara.grid(row=4, column=0, columnspan=2, padx=10, pady=15, sticky="ew")
 
 root.mainloop()
