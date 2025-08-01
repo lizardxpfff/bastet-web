@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Iniciar Sesión - Sistema Bastet</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        .login-container {
+            max-width: 400px;
+            margin: 60px auto;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 4px 24px #0002;
+            padding: 32px 32px 24px 32px;
+            text-align: center;
+        }
+        .login-logo {
+            width: 90px;
+            margin-bottom: 18px;
+        }
+        .login-title {
+            color: #4A90E2;
+            margin-bottom: 8px;
+        }
+        .login-form input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #b3d1f7;
+            border-radius: 6px;
+            font-size: 1em;
+            margin-bottom: 12px;
+            background: #f7fbff;
+        }
+        .login-form button {
+            width: 100%;
+            background: #4A90E2;
+            color: #fff;
+            border: none;
+            padding: 10px 0;
+            border-radius: 6px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .login-form button:hover {
+            background: #1C3D6D;
+        }
+        .login-info {
+            font-size: 0.95em;
+            color: #555;
+            margin-top: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <img src="{{ url_for('static', filename='bastet_logo.png') }}" alt="Logo Bastet" class="login-logo">
+        <h1 class="login-title">Sistema Bastet</h1>
+        <h2 style="font-size:1.2em; color:#1E3A5F; margin-bottom:18px;">Iniciar Sesión</h2>
+        <form method="post" class="login-form">
+            <input type="text" name="usuario" placeholder="Usuario" required autofocus>
+            <input type="password" name="clave" placeholder="Contraseña" required>
+            <button type="submit">&rarr; Ingresar</button>
+        </form>
+        <div class="logout-link" style="margin-top:18px; text-align:center;">
+            <a href="/">Volver al inicio</a>
+        </div>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            <ul>
+            {% for category, message in messages %}
+              <li class="{{ category }}">{{ message }}</li>
+            {% endfor %}
+            </ul>
+          {% endif %}
+        {% endwith %}
+        <div class="login-info">
+            Esta es una simulación de inicio de sesión con Active Directory.<br>
+            Puedes usar cualquier usuario y contraseña para continuar.
+        </div>
+    </div>
+</body>
+</html>

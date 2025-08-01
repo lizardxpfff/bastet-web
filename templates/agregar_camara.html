@@ -1,0 +1,54 @@
+        <div class="logout-link">
+            <a href="{{ url_for('logout') }}">Cerrar Sesión</a>
+        </div>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Agregar Cámara</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="center-container">
+        <img src="{{ url_for('static', filename='bastet_logo.png') }}" alt="Logo Bastet" class="logo">
+        <h1>Agregar Cámara</h1>
+        <form method="post" enctype="multipart/form-data" class="main-form" id="form-agregar">
+            <div class="input-group">
+                <input type="text" name="latitud" placeholder="Latitud" required>
+            </div>
+            <div class="input-group">
+                <input type="text" name="longitud" placeholder="Longitud" required>
+            </div>
+            <div class="input-group">
+                <input type="text" name="propietario" placeholder="Propietario" required>
+            </div>
+            <div class="input-group">
+                <input type="text" name="contacto" placeholder="Contacto" required>
+            </div>
+            <div class="input-group">
+                <label style="font-size:0.95em; color:#888;">Imagen local:</label>
+                <input type="file" name="imagen">
+            </div>
+            <div class="input-group">
+                <input type="text" name="imagen_url" placeholder="o URL de imagen">
+            </div>
+            <div class="button-group">
+                <button type="submit">Guardar</button>
+                <button type="button" onclick="document.getElementById('form-agregar').reset()">Limpiar</button>
+            </div>
+            <div class="link-group">
+                <a href="{{ url_for('index') }}">Volver</a>
+            </div>
+        </form>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            <ul>
+            {% for category, message in messages %}
+              <li class="{{ category }}">{{ message }}</li>
+            {% endfor %}
+            </ul>
+          {% endif %}
+        {% endwith %}
+    </div>
+</body>
+</html>

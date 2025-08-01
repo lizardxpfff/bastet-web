@@ -1,0 +1,138 @@
+/* Botón cerrar sesión */
+.logout-link {
+    margin-top: 18px;
+    text-align: right;
+}
+.logout-link a {
+    color: #e74c3c;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 1em;
+}
+.logout-link a:hover {
+    text-decoration: underline;
+}
+/* Resultados de cámaras */
+.resultados {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 18px;
+}
+.resultado-item {
+    display: flex;
+    align-items: center;
+    background: #f7fbff;
+    border: 1px solid #e0eafc;
+    border-radius: 8px;
+    padding: 10px 14px;
+    gap: 18px;
+    box-shadow: 0 1px 4px #0001;
+}
+.resultado-img {
+    flex-shrink: 0;
+}
+.resultado-info {
+    text-align: left;
+    font-size: 1em;
+}
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: linear-gradient(135deg, #4A90E2 0%, #6EC6FF 100%);
+    color: #1E3A5F;
+    margin: 0;
+    min-height: 100vh;
+}
+.center-container {
+    max-width: 400px;
+    margin: 40px auto;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 4px 24px #0002;
+    padding: 32px 32px 24px 32px;
+    text-align: center;
+}
+.logo {
+    width: 90px;
+    margin-bottom: 18px;
+}
+h1 {
+    color: #4A90E2;
+    margin-bottom: 18px;
+}
+.main-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 18px;
+}
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #b3d1f7;
+    border-radius: 6px;
+    font-size: 1em;
+    margin-bottom: 0;
+    background: #f7fbff;
+}
+.button-group {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+.main-form button {
+    background: #4A90E2;
+    color: #fff;
+    border: none;
+    padding: 10px 0;
+    border-radius: 6px;
+    font-size: 1em;
+    flex: 1;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.main-form button:hover {
+    background: #1C3D6D;
+}
+.link-group {
+    margin-top: 8px;
+}
+.link-group a {
+    color: #4A90E2;
+    text-decoration: none;
+    font-weight: bold;
+}
+ul.camaras-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 18px 0;
+}
+ul.camaras-list li {
+    background: #f7fbff;
+    border: 1px solid #e0eafc;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    padding: 10px;
+    text-align: left;
+}
+.map-link {
+    display: inline-block;
+    margin-top: 10px;
+    background: #4A90E2;
+    color: #fff;
+    padding: 8px 18px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background 0.2s;
+}
+.map-link:hover {
+    background: #1C3D6D;
+}
+li.success { color: green; }
+li.danger { color: red; }
+img {
+    border-radius: 4px;
+    margin-top: 5px;
+    max-width: 100%;
+}

@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_8fe1796c6c094bb93b92f4e2e3764d73 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_8fe1796c6c094bb93b92f4e2e3764d73" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_8fe1796c6c094bb93b92f4e2e3764d73 = L.map(
+                "map_8fe1796c6c094bb93b92f4e2e3764d73",
+                {
+                    center: [-33.60733912801101, -70.57816439410045],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 16,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_334261f67958124c80916275fd2b9100 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_334261f67958124c80916275fd2b9100.addTo(map_8fe1796c6c094bb93b92f4e2e3764d73);
+        
+    
+            var marker_b3e8f016c446719b10c710f32bf914da = L.marker(
+                [-33.60733912801101, -70.57816439410045],
+                {
+}
+            ).addTo(map_8fe1796c6c094bb93b92f4e2e3764d73);
+        
+    
+            var icon_451dd86dee447f9bd31e515254c6ec13 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+            marker_b3e8f016c446719b10c710f32bf914da.bindTooltip(
+                `<div>
+                     Ubicación buscada
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_b3e8f016c446719b10c710f32bf914da.setIcon(icon_451dd86dee447f9bd31e515254c6ec13);
+            
+    
+            var marker_b01b8c0f4619eb7c670ba7117cdd143d = L.marker(
+                [-33.607165, -70.5763902],
+                {
+}
+            ).addTo(map_8fe1796c6c094bb93b92f4e2e3764d73);
+        
+    
+            var icon_cb0840284c21d50153bf317af662d3aa = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "camera",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_3c620a0efba562135550f502abe2aa4d = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_9dbb18e6eafa25727701f463dcf6470c = $(`<div id="html_9dbb18e6eafa25727701f463dcf6470c" style="width: 100.0%; height: 100.0%;"><b>Propietario:</b> CONCHA Y TORO & GANDARILLAS, PUENTE ALTO ,REGION METROPOLITANA,CHILE<br><b>Coordenadas:</b> -33.607165, -70.5763902<br><b>Contacto:</b> </div>`)[0];
+                popup_3c620a0efba562135550f502abe2aa4d.setContent(html_9dbb18e6eafa25727701f463dcf6470c);
+            
+        
+
+        marker_b01b8c0f4619eb7c670ba7117cdd143d.bindPopup(popup_3c620a0efba562135550f502abe2aa4d)
+        ;
+
+        
+    
+    
+            marker_b01b8c0f4619eb7c670ba7117cdd143d.bindTooltip(
+                `<div>
+                     Propietario: CONCHA Y TORO & GANDARILLAS, PUENTE ALTO ,REGION METROPOLITANA,CHILE
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_b01b8c0f4619eb7c670ba7117cdd143d.setIcon(icon_cb0840284c21d50153bf317af662d3aa);
+            
+    
+            var marker_d8f41f4cd2655353dacc9433d9cf1cc4 = L.marker(
+                [-33.607388, -70.577982],
+                {
+}
+            ).addTo(map_8fe1796c6c094bb93b92f4e2e3764d73);
+        
+    
+            var icon_540ef629d3b870543f1d967d17bec9dc = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "camera",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_eece761ee3abdb636aeb3cce037ec31a = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_6e86a442d4f0379c7e943ab2a5709208 = $(`<div id="html_6e86a442d4f0379c7e943ab2a5709208" style="width: 100.0%; height: 100.0%;"><b>Propietario:</b> SANTO DOMINGO & GANDARILLAS, PUENTE ALTO ,REGION METROPOLITANA,CHILE<br><b>Coordenadas:</b> -33.607388, -70.577982<br><b>Contacto:</b> </div>`)[0];
+                popup_eece761ee3abdb636aeb3cce037ec31a.setContent(html_6e86a442d4f0379c7e943ab2a5709208);
+            
+        
+
+        marker_d8f41f4cd2655353dacc9433d9cf1cc4.bindPopup(popup_eece761ee3abdb636aeb3cce037ec31a)
+        ;
+
+        
+    
+    
+            marker_d8f41f4cd2655353dacc9433d9cf1cc4.bindTooltip(
+                `<div>
+                     Propietario: SANTO DOMINGO & GANDARILLAS, PUENTE ALTO ,REGION METROPOLITANA,CHILE
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_d8f41f4cd2655353dacc9433d9cf1cc4.setIcon(icon_540ef629d3b870543f1d967d17bec9dc);
+            
+    
+            var marker_387e6f1ba03f6fa678528189e2fc86c1 = L.marker(
+                [-33.605908, -70.5767018],
+                {
+}
+            ).addTo(map_8fe1796c6c094bb93b92f4e2e3764d73);
+        
+    
+            var icon_599f45dac0bb624757a405aaf0aebed0 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "camera",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_6f77044cdd74aa0cf145061c792e4700 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_78877d0284adf9ac8d717d484cb1ad03 = $(`<div id="html_78877d0284adf9ac8d717d484cb1ad03" style="width: 100.0%; height: 100.0%;"><b>Propietario:</b> CONCHA Y TORO & ERNESTO ALVEAR, PUENTE ALTO ,REGION METROPOLITANA,CHILE<br><b>Coordenadas:</b> -33.605908, -70.5767018<br><b>Contacto:</b> </div>`)[0];
+                popup_6f77044cdd74aa0cf145061c792e4700.setContent(html_78877d0284adf9ac8d717d484cb1ad03);
+            
+        
+
+        marker_387e6f1ba03f6fa678528189e2fc86c1.bindPopup(popup_6f77044cdd74aa0cf145061c792e4700)
+        ;
+
+        
+    
+    
+            marker_387e6f1ba03f6fa678528189e2fc86c1.bindTooltip(
+                `<div>
+                     Propietario: CONCHA Y TORO & ERNESTO ALVEAR, PUENTE ALTO ,REGION METROPOLITANA,CHILE
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_387e6f1ba03f6fa678528189e2fc86c1.setIcon(icon_599f45dac0bb624757a405aaf0aebed0);
+            
+    
+            var marker_cbea3f56e93035fda40b4a6308da37bb = L.marker(
+                [-33.607592, -70.5794885],
+                {
+}
+            ).addTo(map_8fe1796c6c094bb93b92f4e2e3764d73);
+        
+    
+            var icon_cea8f3861ac118b14f4c2faf23568c1b = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "camera",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_825f590eeeb37671e7aaa0569b770ee4 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_3db0e556be96f52eac0584ff3a39708b = $(`<div id="html_3db0e556be96f52eac0584ff3a39708b" style="width: 100.0%; height: 100.0%;"><b>Propietario:</b> GANDARILLA & TOCORNAL GREZ, PUENTE ALTO ,REGION METROPOLITANA,CHILE<br><b>Coordenadas:</b> -33.607592, -70.5794885<br><b>Contacto:</b> </div>`)[0];
+                popup_825f590eeeb37671e7aaa0569b770ee4.setContent(html_3db0e556be96f52eac0584ff3a39708b);
+            
+        
+
+        marker_cbea3f56e93035fda40b4a6308da37bb.bindPopup(popup_825f590eeeb37671e7aaa0569b770ee4)
+        ;
+
+        
+    
+    
+            marker_cbea3f56e93035fda40b4a6308da37bb.bindTooltip(
+                `<div>
+                     Propietario: GANDARILLA & TOCORNAL GREZ, PUENTE ALTO ,REGION METROPOLITANA,CHILE
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_cbea3f56e93035fda40b4a6308da37bb.setIcon(icon_cea8f3861ac118b14f4c2faf23568c1b);
+            
+    
+            var marker_08b0e59251b5d0c6d73286d695c968f8 = L.marker(
+                [-33.608892, -70.5776689],
+                {
+}
+            ).addTo(map_8fe1796c6c094bb93b92f4e2e3764d73);
+        
+    
+            var icon_403e57f5c29ad3881f39eb9f294f3606 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "camera",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_192155e54f3905a469056686e4bf40b9 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_b5ef8c93b88edf23fb703e841336ca1e = $(`<div id="html_b5ef8c93b88edf23fb703e841336ca1e" style="width: 100.0%; height: 100.0%;"><b>Propietario:</b> SANTO DOMINGO & TOCORNAL, PUENTE ALTO ,REGION METROPOLITANA,CHILE<br><b>Coordenadas:</b> -33.608892, -70.5776689<br><b>Contacto:</b> </div>`)[0];
+                popup_192155e54f3905a469056686e4bf40b9.setContent(html_b5ef8c93b88edf23fb703e841336ca1e);
+            
+        
+
+        marker_08b0e59251b5d0c6d73286d695c968f8.bindPopup(popup_192155e54f3905a469056686e4bf40b9)
+        ;
+
+        
+    
+    
+            marker_08b0e59251b5d0c6d73286d695c968f8.bindTooltip(
+                `<div>
+                     Propietario: SANTO DOMINGO & TOCORNAL, PUENTE ALTO ,REGION METROPOLITANA,CHILE
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_08b0e59251b5d0c6d73286d695c968f8.setIcon(icon_403e57f5c29ad3881f39eb9f294f3606);
+            
+    
+            var marker_dec0e8bbfc6dd90d4d951831b50e412b = L.marker(
+                [-33.606343, -70.5798058],
+                {
+}
+            ).addTo(map_8fe1796c6c094bb93b92f4e2e3764d73);
+        
+    
+            var icon_7c039845e8846478bbfd83671184458c = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "camera",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_6173d168f745469fcab1f9a53208b066 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_77cc08c1850e083cd5412f1e138d374a = $(`<div id="html_77cc08c1850e083cd5412f1e138d374a" style="width: 100.0%; height: 100.0%;"><b>Propietario:</b> TOCORNAL GREZ & ERNESTO ALVEAR, PUENTE ALTO ,REGION METROPOLITANA,CHILE<br><b>Coordenadas:</b> -33.606343, -70.5798058<br><b>Contacto:</b> </div>`)[0];
+                popup_6173d168f745469fcab1f9a53208b066.setContent(html_77cc08c1850e083cd5412f1e138d374a);
+            
+        
+
+        marker_dec0e8bbfc6dd90d4d951831b50e412b.bindPopup(popup_6173d168f745469fcab1f9a53208b066)
+        ;
+
+        
+    
+    
+            marker_dec0e8bbfc6dd90d4d951831b50e412b.bindTooltip(
+                `<div>
+                     Propietario: TOCORNAL GREZ & ERNESTO ALVEAR, PUENTE ALTO ,REGION METROPOLITANA,CHILE
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_dec0e8bbfc6dd90d4d951831b50e412b.setIcon(icon_7c039845e8846478bbfd83671184458c);
+            
+</script>
+</html>

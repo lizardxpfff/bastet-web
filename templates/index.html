@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Sistema Bastet</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="center-container">
+        <img src="{{ url_for('static', filename='bastet_logo.png') }}" alt="Logo Bastet" class="logo" onerror="this.style.display='none'">
+        <h1>Sistema Bastet</h1>
+        <form method="post" class="main-form">
+            <div class="input-group">
+                <input type="text" name="latitud" placeholder="Latitud" value="{{ latitud or '' }}">
+            </div>
+            <div class="input-group">
+                <input type="text" name="longitud" placeholder="Longitud" value="{{ longitud or '' }}">
+            </div>
+            <div class="button-group">
+                <button type="submit" name="buscar" value="1">Buscar Cámaras</button>
+                <button type="submit" name="limpiar" value="1">Limpiar</button>
+            </div>
+            <div class="link-group">
+                <a href="{{ url_for('agregar_camara') }}">Agregar Cámara</a>
+            </div>
+        </form>
+        <div class="logout-link">
+            <a href="{{ url_for('logout') }}">Cerrar Sesión</a>
+        </div>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            <ul>
+            {% for category, message in messages %}
+              <li class="{{ category }}">{{ message }}</li>
+            {% endfor %}
+            </ul>
+          {% endif %}
+        {% endwith %}
+        {% if camaras %}
+            <h2>Cámaras encontradas</h2>
+            <div class="resultados">
+            {% for cam in camaras %}
+                <div class="resultado-item">
+                    <div class="resultado-img">
+                        {% if cam['imagen'] %}
+                            <img src="{{ cam['imagen'] if cam['imagen'].startswith('http') else url_for('static', filename='imagenes/' + cam['imagen'].split('/')[-1]) }}" width="120">
+                        {% else %}
+                            <img src="{{ url_for('static', filename='bastet_logo.png') }}" width="80" style="opacity:0.3;">
+                        {% endif %}
+                    </div>
+                    <div class="resultado-info">
+                        <b>Propietario:</b> {{ cam['propietario'] }}<br>
+                        <b>Coordenadas:</b> {{ cam['latitud'] }}, {{ cam['longitud'] }}<br>
+                        <b>Contacto:</b> {{ cam['contacto'] }}
+                    </div>
+                </div>
+            {% endfor %}
+            </div>
+            <a class="map-link" href="{{ url_for('mapa', latitud=latitud, longitud=longitud) }}" target="_blank">Ver Mapa</a>
+        {% endif %}
+    </div>
+</body>
+</html>
