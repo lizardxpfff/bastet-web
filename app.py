@@ -4,7 +4,7 @@ import os
 import folium
 
 app = Flask(__name__)
-app.secret_key = 'supersecretkey'  # Cambia esto en producción
+app.secret_key = 'supersecretkey'  # Cambiar
 
 DATABASE = 'camaras.db'
 UPLOAD_FOLDER = os.path.join('static', 'imagenes')

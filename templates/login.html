@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Iniciar Sesión - Sistema Bastet</title>
+    <title>Iniciar Sesión - Home Page</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <style>
         .login-container {
@@ -55,7 +55,7 @@
 <body>
     <div class="login-container">
         <img src="{{ url_for('static', filename='bastet_logo.png') }}" alt="Logo Bastet" class="login-logo">
-        <h1 class="login-title">Sistema Bastet</h1>
+        <h1 class="login-title">Bienvenido</h1>
         <h2 style="font-size:1.2em; color:#1E3A5F; margin-bottom:18px;">Iniciar Sesión</h2>
         <form method="post" class="login-form">
             <input type="text" name="usuario" placeholder="Usuario" required autofocus>
