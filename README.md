@@ -1,26 +1,64 @@
-# Proyecto Bastet
+# Bastet — Aplicación web para consulta de cámaras
 
-## Descripción
+Esta es la versión web del proyecto Bastet. Es una pequeña aplicación web hecha con Flask que permite:
 
-**Bastet** es una aplicación de **consulta de cámaras** que permite buscar cámaras cercanas en un radio determinado (200 metros) utilizando coordenadas geográficas (latitud y longitud). Los usuarios pueden agregar nuevas cámaras, buscar cámaras cercanas y almacenar datos en una base de datos SQLite.
+- Buscar cámaras cercanas a unas coordenadas (latitud/longitud).
+- Agregar cámaras (con propietario, contacto y una imagen opcional).
+- Ver las cámaras resultantes sobre un mapa generado con Folium.
 
-Este proyecto está diseñado para ser fácil de usar, con una interfaz gráfica limpia utilizando **Tkinter** y una integración con la **API de Google Maps** para obtener direcciones basadas en coordenadas geográficas.
+Datos técnicos y comportamiento:
 
-## Funcionalidades
+- La aplicación usa una base de datos SQLite local (`camaras.db`). Si no existe, se crea automáticamente al iniciar la app.
+- Las imágenes subidas se guardan en `static/imagenes/` y se sirven desde la carpeta `static`.
+- La aplicación incluye un login simulado (acepta cualquier usuario/clave) y protege las rutas principales.
 
-- **Buscar cámaras cercanas**: Ingresar coordenadas geográficas y obtener una lista de cámaras cercanas en un radio de 200 metros.
-- **Agregar cámaras**: Permite a los usuarios ingresar las coordenadas de una cámara, propietario y contacto, y guardar esta información en una base de datos SQLite.
-- **Interfaz gráfica**: Utiliza la librería **Tkinter** para crear una interfaz fácil de usar, con botones para buscar cámaras, agregar cámaras y limpiar los campos de entrada.
-- **API de Google Maps**: Utiliza la API de Google Maps para obtener direcciones a partir de las coordenadas proporcionadas.
+## Requisitos
 
-## Tecnologías utilizadas
+- Python 3.8+ (probado en 3.11)
+- pip
 
-- **Python 3.11**: Lenguaje de programación.
-- **Tkinter**: Biblioteca para crear interfaces gráficas de usuario (GUIs) en Python.
-- **SQLite**: Base de datos ligera para almacenar la información de las cámaras.
-- **requests**: Biblioteca para hacer peticiones HTTP y obtener la dirección desde la API de Google Maps.
-- **API de Google Maps**: Para obtener direcciones basadas en las coordenadas geográficas.
+## Instalación (local / desarrollo)
 
-![image](https://github.com/user-attachments/assets/775a0e9d-043e-402e-a026-284438f401c8) 
-![image](https://github.com/user-attachments/assets/7669fa90-3870-4d5b-8c82-98f859aef4a3)
+Recomendado: usar un entorno virtual.
 
+```bash
+# macOS / Linux
+python3 -m venv .venv
+source .venv/bin/activate
+
+# Instalar dependencias
+pip install -r requirements.txt
+```
+
+## Ejecutar la aplicación
+
+```bash
+# Desde la raíz del proyecto
+export FLASK_APP=app.py
+export FLASK_ENV=development   # opcional: activa auto-reload y debug
+flask run
+
+# o directamente
+python app.py
+```
+
+La aplicación quedará disponible en http://127.0.0.1:5000.
+
+## Configuración y notas
+
+- La clave secreta para sesiones está definida en `app.py` como `app.secret_key = 'supersecretkey'`. Para producción, cambia esto por una variable de entorno segura.
+- La base de datos por defecto es `camaras.db` en la raíz del proyecto. Si quieres usar otra ubicación, modifica la constante `DATABASE` en `app.py`.
+- Extensiones de imagen permitidas: png, jpg, jpeg, gif. Se guardan en `static/imagenes/`.
+
+## Dependencias
+
+- Flask
+- folium
+
+Se incluyen en `requirements.txt`.
+
+## Siguientes pasos recomendados
+
+- Añadir un `requirements.txt` (ya incluido en este repo).
+- Añadir un archivo `.env` para variables sensibles (SECRET_KEY) y usar `python-dotenv`/config desde Flask.
+- Crear tests básicos y/o configurar GitHub Actions para CI.
