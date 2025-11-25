@@ -44,11 +44,7 @@ python app.py
 
 La aplicación quedará disponible en http://127.0.0.1:5000.
 
-## Configuración y notas
 
-- La clave secreta para sesiones está definida en `app.py` como `app.secret_key = 'supersecretkey'`. Para producción, cambia esto por una variable de entorno segura.
-- La base de datos por defecto es `camaras.db` en la raíz del proyecto. Si quieres usar otra ubicación, modifica la constante `DATABASE` en `app.py`.
-- Extensiones de imagen permitidas: png, jpg, jpeg, gif. Se guardan en `static/imagenes/`.
 
 ## Dependencias
 
